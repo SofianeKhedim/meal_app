@@ -1,56 +1,36 @@
 import 'package:flutter/material.dart';
-import 'package:meal_app/dummy_data.dart';
+
 import 'package:meal_app/screen/category_screen.dart';
 import 'package:meal_app/screen/filter_screen.dart';
 import 'package:meal_app/screen/home_screen.dart';
 import 'package:meal_app/theme/theme.dart';
+import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-import 'models/meal.dart';
+import 'providers/meal_provider.dart';
 import 'screen/meal_details_screen.dart';
+import 'screen/on_boarding_screen.dart';
 
-void main() {
-  runApp(const MyApp());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+
+  Widget homePage =
+      prefs.getBool('watched') ?? false ? const HomePage() : const OnBoardingScreen();
+      print(prefs.getBool('watched'));
+
+  runApp(
+    ChangeNotifierProvider<MealProvider>(
+      create: (context) => MealProvider(),
+      child: MyApp(homePage : homePage),
+    ),
+  );
 }
 
-class MyApp extends StatefulWidget {
-  const MyApp({super.key});
+class MyApp extends StatelessWidget {
+  const MyApp({super.key, this.homePage});
 
-  @override
-  State<MyApp> createState() => _MyAppState();
-}
-
-class _MyAppState extends State<MyApp> {
-  Map<String, bool> _filters = {
-    'gluten': false,
-    'lactose': false,
-    'vegan': false,
-    'vegetarian': false,
-  };
-
-  List<Meal> _availableMeals = dummyMeals;
-
-  void _setFilters(Map<String, bool> _filterData) {
-    setState(() {
-      _filters = _filterData;
-
-      _availableMeals = dummyMeals.where((meal) {
-        if (_filters['gluten']! && !meal.isGlutenFree) {
-          return false;
-        }
-        if (_filters['lactose']! && !meal.isLactoseFree) {
-          return false;
-        }
-        if (_filters['vegan']! && !meal.isVegan) {
-          return false;
-        }
-        if (_filters['vegetarian']! && !meal.isVegetarian) {
-          return false;
-        }
-
-        return true;
-      }).toList();
-    });
-  }
+  final Widget? homePage;
 
   @override
   Widget build(BuildContext context) {
@@ -70,10 +50,11 @@ class _MyAppState extends State<MyApp> {
             elevation: 0),
       ),
       routes: {
-        '/': (context) => HomePage(availableMeals: _availableMeals),
-        CategoryScreen.routeName: (context) =>  CategoryScreen(_availableMeals),
+        '/': (context) => homePage!,
+        HomePage.routeName: (context) => const HomePage(),
+        CategoryScreen.routeName: (context) => const CategoryScreen(),
         MealDetailScreen.routeName: (context) => const MealDetailScreen(),
-        FilterScreen.routeName: (context) => FilterScreen(_filters,_setFilters),
+        FilterScreen.routeName: (context) => const FilterScreen(),
       },
     );
   }

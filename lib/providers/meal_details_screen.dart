@@ -8,13 +8,13 @@ class MealDetailScreen extends StatelessWidget {
 
   static const routeName = 'meal_detail';
 
+  
+
   @override
   Widget build(BuildContext context) {
     final routeArg =
         ModalRoute.of(context)!.settings.arguments as Map<String, String>;
     final mealId = routeArg['mealId']!;
-    final category = routeArg['category']!;
-    final isSmall = routeArg['isSmall']!;
     final mealIndex = dummyMeals.indexWhere((element) => element.id == mealId);
     final String imageUrl = dummyMeals[mealIndex].imageUrl;
     final String title = dummyMeals[mealIndex].title;
@@ -39,7 +39,7 @@ class MealDetailScreen extends StatelessWidget {
             expandedHeight: 300,
             flexibleSpace: FlexibleSpaceBar(
               background: Hero(
-                tag: '$mealId$category$isSmall',
+                tag: mealId,
                 child: Image.network(
                   imageUrl,
                   height: 250,
@@ -49,19 +49,9 @@ class MealDetailScreen extends StatelessWidget {
               centerTitle: true,
               titlePadding:
                   const EdgeInsets.symmetric(horizontal: 10, vertical: 13),
-              title: Text(
-                title,
-                style: TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.w700,
-                    shadows: [
-                      BoxShadow(
-                          color: Colors.black.withOpacity(0.2),
-                          offset: const Offset(0, 1),
-                          blurRadius: 8,
-                          spreadRadius: 2),
-                    ]),
-              ),
+              title: Text(title,
+                  style: const TextStyle(
+                      fontSize: 20, fontWeight: FontWeight.w700)),
             ),
           ),
           SliverToBoxAdapter(
@@ -113,6 +103,7 @@ class MealDetailScreen extends StatelessWidget {
         children: [
           if (!isSteps)
             Row(
+              
               children: [
                 const CircleAvatar(
                   radius: 3,

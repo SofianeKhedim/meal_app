@@ -8,65 +8,98 @@ final dummyCategories = [
       id: 'c1',
       title: 'Italian',
       color: Colors.white,
-      image: 'assets/images/italien_food.png'),
+      image: 'assets/category/italien.jpg'),
   Category(
       id: 'c2',
       title: 'Quick & Easy',
       color: Colors.red,
-      image: 'assets/images/fast_food.png'),
+      image: 'assets/category/quick_and_easy.jpeg'),
   Category(
       id: 'c3',
       title: 'Hamburgers',
       color: Colors.orange,
-      image: 'assets/images/hamburgers.png'),
+      image: 'assets/category/burger.png'),
   Category(
       id: 'c4',
       title: 'German',
       color: Colors.amber,
-      image: 'assets/images/german_food.png'),
+      image: 'assets/category/german.jpg'),
   Category(
       id: 'c5',
       title: 'Light & Lovely',
       color: Colors.blue,
-      image: 'assets/images/italien_food.png'),
+      image: 'assets/category/light_lovely.jpg'),
   Category(
       id: 'c6',
       title: 'Exotic',
       color: Colors.green,
-      image: 'assets/images/italien_food.png'),
+      image: 'assets/category/exotic.jpg'),
   Category(
       id: 'c7',
       title: 'Breakfast',
       color: Colors.lightBlue,
-      image: 'assets/images/italien_food.png'),
+      image: 'assets/category/breakfast.jpg'),
   Category(
       id: 'c8',
       title: 'Asian',
       color: Colors.lightGreen,
-      image: 'assets/images/italien_food.png'),
+      image: 'assets/category/asian.jpeg'),
   Category(
       id: 'c9',
       title: 'French',
       color: Colors.pink,
-      image: 'assets/images/italien_food.png'),
+      image: 'assets/category/french.png'),
   Category(
       id: 'c10',
       title: 'Summer',
       color: Colors.teal,
-      image: 'assets/images/italien_food.png'),
+      image: 'assets/category/exotic.jpg'),
   Category(
       id: 'c11',
       title: 'text',
       color: Colors.lightGreenAccent,
-      image: 'assets/images/italien_food.png'),
+      image: 'assets/category/light_lovely.jpg'),
   Category(
       id: 'c12',
       title: 'text',
       color: Colors.tealAccent,
-      image: 'assets/images/italien_food.png'),
+      image: 'assets/category/burger.png'),
 ];
 
 final dummyPopularMeals = [
+  Meal(
+    id: 'm8',
+    categories: [
+      'c8',
+    ],
+    title: 'Creamy Indian Chicken Curry',
+    affordability: Affordability.pricey,
+    complexity: Complexity.challenging,
+    imageUrl:
+        'https://cdn.pixabay.com/photo/2018/06/18/16/05/indian-food-3482749_1280.jpg',
+    duration: 35,
+    ingredients: [
+      '4 Chicken Breasts',
+      '1 Onion',
+      '2 Cloves of Garlic',
+      '1 Piece of Ginger',
+      '4 Tablespoons Almonds',
+      '1 Teaspoon Cayenne Pepper',
+      '500ml Coconut Milk',
+    ],
+    steps: [
+      'Slice and fry the chicken breast',
+      'Process onion, garlic and ginger into paste and sauté everything',
+      'Add spices and stir fry',
+      'Add chicken breast + 250ml of water and cook everything for 10 minutes',
+      'Add coconut milk',
+      'Serve with rice'
+    ],
+    isGlutenFree: true,
+    isVegan: false,
+    isVegetarian: false,
+    isLactoseFree: true,
+  ),
   Meal(
     id: 'm10',
     categories: [
@@ -199,39 +232,7 @@ final dummyPopularMeals = [
     isVegetarian: true,
     isLactoseFree: true,
   ),
-  Meal(
-    id: 'm8',
-    categories: [
-      'c8',
-    ],
-    title: 'Creamy Indian Chicken Curry',
-    affordability: Affordability.pricey,
-    complexity: Complexity.challenging,
-    imageUrl:
-        'https://cdn.pixabay.com/photo/2018/06/18/16/05/indian-food-3482749_1280.jpg',
-    duration: 35,
-    ingredients: [
-      '4 Chicken Breasts',
-      '1 Onion',
-      '2 Cloves of Garlic',
-      '1 Piece of Ginger',
-      '4 Tablespoons Almonds',
-      '1 Teaspoon Cayenne Pepper',
-      '500ml Coconut Milk',
-    ],
-    steps: [
-      'Slice and fry the chicken breast',
-      'Process onion, garlic and ginger into paste and sauté everything',
-      'Add spices and stir fry',
-      'Add chicken breast + 250ml of water and cook everything for 10 minutes',
-      'Add coconut milk',
-      'Serve with rice'
-    ],
-    isGlutenFree: true,
-    isVegan: false,
-    isVegetarian: false,
-    isLactoseFree: true,
-  ),
+  
 ];
 
 final dummyMeals = [

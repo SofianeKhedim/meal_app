@@ -2,6 +2,8 @@
 
 import 'package:flutter/material.dart';
 
+// const kPrimaryClr = Color.fromARGB(255, 204, 24, 84);
+// const kPrimaryClr = Color(0xFFE42021);
 const kPrimaryClr = Color(0xFF6CC51D);
 const kGreyClr = Color(0xFF303030);
 const kDefaultPadding = EdgeInsets.all(16);

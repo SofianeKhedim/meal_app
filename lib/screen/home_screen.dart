@@ -1,23 +1,25 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_feather_icons/flutter_feather_icons.dart';
+import 'package:meal_app/providers/meal_provider.dart';
 import 'package:meal_app/theme/theme.dart';
 import 'package:meal_app/widget/banner.dart';
 import 'package:meal_app/widget/drawer.dart';
+import 'package:provider/provider.dart';
 
-import '../models/meal.dart';
 import '../widget/cardColumn.dart';
 import '../widget/cardRow.dart';
 import '../widget/category.dart';
 import '../widget/iconBox.dart';
 
 class HomePage extends StatelessWidget {
-  const HomePage({super.key, required this.availableMeals});
+  const HomePage({super.key});
 
-  final List<Meal> availableMeals;
+  static const routeName = 'home_screen';
 
   @override
   Widget build(BuildContext context) {
+    Provider.of<MealProvider>(context, listen: false).setData();
     return Scaffold(
       drawer: const MyDrawer(),
       body: SafeArea(
@@ -53,7 +55,7 @@ class HomePage extends StatelessWidget {
               const CardRow(),
               ...List.generate(
                 12,
-                (index) => CardColumn(index: index,availableMeals: availableMeals,),
+                (index) => CardColumn(index: index),
               )
             ],
           ),

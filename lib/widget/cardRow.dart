@@ -35,6 +35,7 @@ class CardRow extends StatelessWidget {
                     mealId: dummyPopularMeals[index].id,
                     imageUrl:
                         dummyPopularMeals[index].imageUrl,
+                        
                   ),
                 );
               }),

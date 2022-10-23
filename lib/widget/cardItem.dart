@@ -30,8 +30,6 @@ class CardItem extends StatelessWidget {
 
   final bool isInCategory;
 
-  
-
   String get complexityText {
     switch (complexity) {
       case Complexity.simple:
@@ -55,11 +53,10 @@ class CardItem extends StatelessWidget {
   }
 
   void selectMeal(BuildContext context) {
-    
     Navigator.push(
         context,
         PageRouteBuilder(
-          settings: RouteSettings(arguments: {'mealId': mealId}),
+          settings: RouteSettings(arguments: {'mealId': mealId,'category': category,'isSmall':'$isSmall'}),
           reverseTransitionDuration: const Duration(milliseconds: 600),
           transitionDuration: const Duration(milliseconds: 600),
           pageBuilder: (context, animation, secondaryAnimation) =>
@@ -81,14 +78,8 @@ class CardItem extends StatelessWidget {
         ));
   }
 
-  
-
   @override
   Widget build(BuildContext context) {
-
-
-
-
     return GestureDetector(
       onTap: () => selectMeal(context),
       child: Container(
@@ -122,13 +113,30 @@ class CardItem extends StatelessWidget {
                       color: kPrimaryClr.withOpacity(0.41),
                     ),
                     child: ClipRRect(
-                        borderRadius: BorderRadius.circular(12),
+                      borderRadius: BorderRadius.circular(12),
+                      child: Hero(
+                        tag: '$mealId$category$isSmall',
                         child: Image.network(
                           imageUrl,
                           height: isSmall ? 100 : 130,
                           width: isSmall ? 180 : 222,
                           fit: BoxFit.cover,
-                        )),
+                          loadingBuilder: (BuildContext context, Widget child,
+                              ImageChunkEvent? loadingProgress) {
+                            if (loadingProgress == null) return child;
+                            return Center(
+                              child: CircularProgressIndicator(
+                                color: kPrimaryClr,
+                                value: loadingProgress.expectedTotalBytes != null
+                                    ? loadingProgress.cumulativeBytesLoaded /
+                                        loadingProgress.expectedTotalBytes!
+                                    : null,
+                              ),
+                            );
+                          },
+                        ),
+                      ),
+                    ),
                   ),
                   // const Positioned(
                   //   right: 8,

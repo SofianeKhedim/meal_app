@@ -8,6 +8,8 @@ class KBanner extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
       child: Container(
+        width: 361,
+        height: 129,
         decoration: BoxDecoration(
           borderRadius: kborderRadius,
           color: kPrimaryClr,
@@ -20,6 +22,7 @@ class KBanner extends StatelessWidget {
         ],
         ),
         
+        // child: const Image(image: AssetImage('assets/images/bannerred.png'),fit: BoxFit.cover,),
         child: const Image(image: AssetImage('assets/images/bannerImg.png')),
       ),
     );

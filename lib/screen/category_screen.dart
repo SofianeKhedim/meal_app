@@ -1,16 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:meal_app/dummy_data.dart';
+import 'package:provider/provider.dart';
 
 import '../models/meal.dart';
+import '../providers/meal_provider.dart';
 import '../widget/cardItem.dart';
 
 class CategoryScreen extends StatelessWidget {
-  const CategoryScreen(this.availableMeals, {super.key});
+  const CategoryScreen({super.key});
   static const routeName = 'category_screen';
-  final List<Meal> availableMeals;
 
   @override
   Widget build(BuildContext context) {
+    final availableMeals = Provider.of<MealProvider>(context).availableMeals;
+
     final routeArg =
         ModalRoute.of(context)!.settings.arguments as Map<String, String>;
     final categoryTitle = routeArg['title'];

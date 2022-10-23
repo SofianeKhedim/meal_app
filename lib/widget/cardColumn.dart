@@ -5,14 +5,22 @@ import 'package:meal_app/dummy_data.dart';
 import 'package:meal_app/models/meal.dart';
 import 'package:meal_app/widget/cardItem.dart';
 import 'package:meal_app/widget/textRow.dart';
+import 'package:provider/provider.dart';
+
+import '../providers/meal_provider.dart';
 
 class CardColumn extends StatelessWidget {
-  const CardColumn({super.key, required this.index, required this.availableMeals});
+  const CardColumn({super.key, required this.index});
   final int index;
-  final List<Meal> availableMeals;
+
+
+
 
   @override
   Widget build(BuildContext context) {
+    
+    final availableMeals = Provider.of<MealProvider>(context).availableMeals;
+      
     final categoryTitle = dummyCategories[index].title;
     final categoryId = dummyCategories[index].id;
     var categoryMeals = availableMeals.where((meal) {
@@ -23,7 +31,7 @@ class CardColumn extends StatelessWidget {
     }
     return Column(
       children: [
-        if(categoryMeals.length>0) TextRow(categoryTitle: categoryTitle, categoryId: categoryId),
+        if(categoryMeals.isNotEmpty) TextRow(categoryTitle: categoryTitle, categoryId: categoryId),
         Row(
             mainAxisAlignment: MainAxisAlignment.start,
             children: categoryMeals

@@ -23,6 +23,7 @@ class _CategoryPageViewState extends State<CategoryPageView> {
   Widget build(BuildContext context) {
     return Column(
       children: [
+        const SizedBox(height: 5),
         SizedBox(
           height: 95,
           width: double.infinity,
@@ -60,24 +61,25 @@ class _CategoryPageViewState extends State<CategoryPageView> {
 
   Container categoryItem(int startRange, int endRange) {
     return Container(
-      padding: kDefaultPaddingHorizontal,
+      padding: const EdgeInsets.symmetric(horizontal: 2),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: dummyCategories
             .getRange(startRange, endRange)
             .map((e) => Column(
                   children: [
-                    Container(
-                      decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          border: Border.all(color: kPrimaryClr)),
-                      child: GestureDetector(
-                        onTap: () {
-                          _selectCategory(context, e.id, e.title);
-                        },
-                        child: CircleAvatar(
-                          radius: 30,
-                          backgroundColor: Colors.white,
+                    GestureDetector(
+                      onTap: () {
+                        _selectCategory(context, e.id, e.title);
+                      },
+                      child: Container(
+                        decoration: BoxDecoration(borderRadius: kborderRadius,
+                        // border: Border.all(color: kPrimaryClr,strokeAlign: StrokeAlign.center,width: 2)
+                        ),
+                        height: 60,
+                        width: 60,
+                        child: ClipRRect(
+                          borderRadius: kborderRadius,
                           child: Image.asset(
                             e.image,
                             fit: BoxFit.cover,
